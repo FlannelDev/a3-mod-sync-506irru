@@ -1,9 +1,10 @@
 $ErrorActionPreference="Stop"
 $Root=(Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 Set-Location $Root
-py -m pip install -r requirements-build.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements-build.txt
 Remove-Item -Recurse -Force build,dist -ErrorAction SilentlyContinue
-py -m PyInstaller --noconfirm --clean --onedir --windowed --name "506th-Arma3-Mod-Sync" "src\506th_mod_sync.py"
+python -m PyInstaller --noconfirm --clean --onedir --windowed --name "506th-Arma3-Mod-Sync" "src\506th_mod_sync.py"
 $Version="5.0.0"
 New-Item -ItemType Directory -Force release | Out-Null
 $Zip="release\506th-Arma3-Mod-Sync-v$Version-Windows-x64.zip"
